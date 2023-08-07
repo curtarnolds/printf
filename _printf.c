@@ -9,57 +9,22 @@
 */
 int _printf(const char *format, ...)
 {
-	char *temp;
-	int i = 0, count = 0;
 	va_list arg_list;
-	va_start(arg_list, format);
+	int i = 0, count = 0;
 
+	va_start(arg_list, format);
 	while (format[i])
 	{
 		if (format[i] == '\\' && format[i + 1] != ' ')
 		{
-			switch (format[i + 1])
-			{
-				case 'n':
-					_putchar('\n');
-
-					break;
-
-				case 't':
-					_putchar('\t');
-					break;
-
-				default:
-					_putchar('\\');
-					break;
-			}
+			_handle_escape_sequence(format[i + 1], &count);
 			i++;
-			count++;
 		}
 		else if (format[i] == '%')
 		{
 			while (format[i + 1] == ' ')
 				i++;
-			switch (format[i + 1])
-			{
-				case 'c':
-					_putchar(va_arg(arg_list, int));
-					break;
-				case 's':
-					temp = va_arg(arg_list, char *);
-					write(1, temp, strlen(temp));
-					count = count + strlen(temp) - 1;
-					break;
-				case '%':
-					_putchar('%');
-					break;
-				default:
-					_putchar('%');
-					_putchar(format[i + 1]);
-					break;
-			}
-			i++;
-			count++;
+			_handle_format_specifier(format, &arg_list, &count, &i);
 		}
 		else
 		{
@@ -70,4 +35,62 @@ int _printf(const char *format, ...)
 	}
 	va_end(arg_list);
 	return (count);
+}
+
+
+/**
+ * _handle_escape_sequence - ...
+ * @format: ...
+ * @count: ...
+*/
+void _handle_escape_sequence(char format, int *count)
+{
+	switch (format)
+	{
+		case 'n':
+			_putchar('\n');
+			break;
+		case 't':
+			_putchar('\t');
+			break;
+		default:
+			_putchar('\\');
+			break;
+	}
+	(*count)++;
+}
+
+
+/**
+ * _handle_format_specifier - ...
+ * @format: ...
+ * @arg_list: ...
+ * @count: ...
+ * @i: ...
+*/
+void _handle_format_specifier(const char *format, va_list *arg_list,
+int *count, int *i)
+{
+	char *temp;
+
+	switch (format[*i + 1])
+	{
+		case 'c':
+			_putchar(va_arg(*arg_list, int));
+			break;
+		case 's':
+			temp = va_arg(*arg_list, char *);
+			write(1, temp, strlen(temp));
+			*count = *count + strlen(temp) - 1;
+			break;
+		case '%':
+			_putchar('%');
+			break;
+		default:
+			_putchar('%');
+			_putchar(format[*i + 1]);
+			break;
+	}
+	(*i)++;
+	(*count)++;
 }
