@@ -10,7 +10,7 @@
 int _printf(const char *format, ...)
 {
 	char *temp;
-	int i = 0;
+	int i = 0, count = 0;
 	va_list arg_list;
 	va_start(arg_list, format);
 
@@ -22,6 +22,7 @@ int _printf(const char *format, ...)
 			{
 				case 'n':
 					_putchar('\n');
+
 					break;
 
 				case 't':
@@ -33,6 +34,7 @@ int _printf(const char *format, ...)
 					break;
 			}
 			i++;
+			count++;
 		}
 		else if (format[i] == '%')
 		{
@@ -56,11 +58,15 @@ int _printf(const char *format, ...)
 					break;
 			}
 			i++;
+			count++;
 		}
 		else
+		{
 			_putchar(format[i]);
+			count++;
+		}
 		i++;
 	}
 	va_end(arg_list);
-	return (i);
+	return (count);
 }
