@@ -12,6 +12,8 @@ int _printf(const char *format, ...)
 	va_list arg_list;
 	int i = 0, count = 0;
 
+	if (format == NULL)
+		return (0);
 	va_start(arg_list, format);
 	while (format[i])
 	{
@@ -71,7 +73,7 @@ void _handle_escape_sequence(char format, int *count)
 void _handle_format_specifier(const char *format, va_list *arg_list,
 int *count, int *i)
 {
-	char *temp;
+	char *temp_c;
 
 	switch (format[*i + 1])
 	{
@@ -79,9 +81,16 @@ int *count, int *i)
 			_putchar(va_arg(*arg_list, int));
 			break;
 		case 's':
-			temp = va_arg(*arg_list, char *);
-			write(1, temp, strlen(temp));
-			*count = *count + strlen(temp) - 1;
+			temp_c = va_arg(*arg_list, char *);
+			if (temp_c == NULL)
+			{
+				;
+			}
+			else
+			{
+				write(1, temp_c, strlen(temp_c));
+				count = count + strlen(temp_c) - 1;
+			}
 			break;
 		case '%':
 			_putchar('%');
