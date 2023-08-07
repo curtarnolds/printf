@@ -89,7 +89,7 @@ int *count, int *i)
 			else
 			{
 				write(1, temp_c, strlen(temp_c));
-				count = count + strlen(temp_c) - 1;
+				*count = *count + strlen(temp_c) - 1;
 			}
 			break;
 		case '%':
