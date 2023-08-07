@@ -48,6 +48,7 @@ int _printf(const char *format, ...)
 				case 's':
 					temp = va_arg(arg_list, char *);
 					write(1, temp, strlen(temp));
+					count = count + strlen(temp) - 1;
 					break;
 				case '%':
 					_putchar('%');
