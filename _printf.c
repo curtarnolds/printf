@@ -10,7 +10,7 @@
 int _printf(const char *format, ...)
 {
 	char *temp;
-	int i = 0, j = 0;
+	int i = 0;
 	va_list arg_list;
 	va_start(arg_list, format);
 
