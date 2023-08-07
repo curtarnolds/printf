@@ -24,6 +24,12 @@ int _printf(const char *format, ...)
 		}
 		else if (format[i] == '%')
 		{
+			if (!format[i + 1])
+			{
+				;
+				count--;
+				break;
+			}
 			while (format[i + 1] == ' ')
 				i++;
 			_handle_format_specifier(format, &arg_list, &count, &i);
@@ -98,6 +104,7 @@ int *count, int *i)
 		default:
 			_putchar('%');
 			_putchar(format[*i + 1]);
+			(*count)++;
 			break;
 	}
 	(*i)++;
