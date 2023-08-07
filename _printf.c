@@ -13,7 +13,7 @@ int _printf(const char *format, ...)
 	int i = 0, count = 0;
 
 	if (format == NULL)
-		return (0);
+		return (-1);
 	va_start(arg_list, format);
 	while (format[i])
 	{
@@ -88,9 +88,10 @@ int *count, int *i)
 			break;
 		case 's':
 			temp_c = va_arg(*arg_list, char *);
-			if (temp_c == NULL)
+			if (temp_c == ((char *)0))
 			{
-				;
+				write(1, "(null)", strlen("(null)"));
+				(*count) = *count + strlen("(null)") - 1;
 			}
 			else
 			{
