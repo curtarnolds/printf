@@ -43,7 +43,6 @@ char *_int_to_string(int num, int base)
 		isNegative = true;
 		num = -num;
 	}
-
 	temp = num;
 	while (temp != 0)
 	{
@@ -51,15 +50,10 @@ char *_int_to_string(int num, int base)
 		charLength++;
 	}
 	if (isNegative)
-		charLength ++;
-
+		charLength++;
 	str = (char *) malloc((charLength + 1) * sizeof(char));
 	if (str == NULL)
-	{
-		write(1, "null", strlen("null"));
 		exit(-1);
-	}
-
 	if (num == 0)
 		str[i++] = '0';
 	else
@@ -73,15 +67,13 @@ char *_int_to_string(int num, int base)
 		if (isNegative)
 			str[i++] = '-';
 	}
-
 	str[i] = '\0';
 	_reverse(str, i);
-
 	return (str);
 }
 
 
 /**
  * _nulled_write - Write to fd but represent NULL as (null)
- * 
+ *
 */
