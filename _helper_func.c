@@ -51,7 +51,7 @@ char *_int_to_string(long int num, unsigned long int base)
 	}
 	if (isNegative)
 		charLength++;
-	str = (char *) malloc((charLength + 2) * sizeof(char));
+	str = (char *) malloc((charLength + 1) * sizeof(char));
 	if (str == NULL)
 		exit(-1);
 	if (num == 0)
