@@ -74,14 +74,7 @@ char *_int_to_string(long int num, unsigned long int base)
 
 
 /**
- * _nulled_write - Write to fd but represent NULL as (null)
- *
-*/
-
-
-
-/**
- * write_number - write a number to stdout
+ * write_number - Write a number to stdout
  * @arg_list: List of variable arguments
  * @count: Number of characters written
  * @base: The base of the number to write
