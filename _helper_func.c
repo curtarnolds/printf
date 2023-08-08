@@ -6,10 +6,10 @@
  * @str: The string to Reverse
  * @length: The length of the string
 */
-void _reverse(char str[], int length)
+void _reverse(char str[], unsigned long int length)
 {
-	int start = 0;
-	int end = length - 1;
+	unsigned long int start = 0;
+	unsigned long int end = length - 1;
 	char temp;
 
 	while (start < end)
@@ -29,9 +29,9 @@ void _reverse(char str[], int length)
  * @base: The base of the integer
  * Return: The string representation of the integer, else NULL on failure
 */
-char *_int_to_string(int num, int base)
+char *_int_to_string(long int num, unsigned long int base)
 {
-	int isNegative, i, charLength, rem, temp;
+	unsigned long int isNegative, i, charLength, rem, temp;
 	char *str;
 
 	isNegative = false;
@@ -51,7 +51,7 @@ char *_int_to_string(int num, int base)
 	}
 	if (isNegative)
 		charLength++;
-	str = (char *) malloc((charLength + 1) * sizeof(char));
+	str = (char *) malloc((charLength + 2) * sizeof(char));
 	if (str == NULL)
 		exit(-1);
 	if (num == 0)
@@ -77,3 +77,23 @@ char *_int_to_string(int num, int base)
  * _nulled_write - Write to fd but represent NULL as (null)
  *
 */
+
+
+
+/**
+ * write_number - write a number to stdout
+ * @arg_list: List of variable arguments
+ * @count: Number of characters written
+ * @base: The base of the number to write
+*/
+void write_number(va_list *arg_list, int *count, unsigned long int base)
+{
+	unsigned long int _int;
+	char *temp;
+
+	_int = va_arg(*arg_list, int);
+	temp = _int_to_string(_int, base);
+	_int = write(1, temp, strlen(temp));
+	*count = *count + strlen(temp) - 1;
+	free(temp);
+}

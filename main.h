@@ -16,6 +16,7 @@ int _putchar(char c);
 void _handle_format_specifier(const char *format,
 va_list *arg_list, int *count, int *i);
 void _handle_escape_sequence(char format, int *count);
-char *_int_to_string(int num, int base);
-void _reverse(char str[], int length);
+char *_int_to_string(long int num, unsigned long int base);
+void _reverse(char str[], unsigned long int length);
+void write_number(va_list *arg_list, int *count, unsigned long int base);
 #endif

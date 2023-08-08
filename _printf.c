@@ -80,7 +80,6 @@ void _handle_format_specifier(const char *format, va_list *arg_list,
 int *count, int *i)
 {
 	char *temp;
-	int _int;
 
 	switch (format[*i + 1])
 	{
@@ -103,13 +102,12 @@ int *count, int *i)
 		case '%':
 			_putchar('%');
 			break;
+		case 'b':
+			write_number(arg_list, count, 2);
+			break;
 		case 'd':
 		case 'i':
-			_int = va_arg(*arg_list, int);
-			temp = _int_to_string(_int, 10);
-			write(1, temp, strlen(temp));
-			*count = *count + strlen(temp) - 1;
-			free(temp);
+			write_number(arg_list, count, 10);
 			break;
 		default:
 			_putchar('%');
