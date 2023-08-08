@@ -108,6 +108,7 @@ int *count, int *i)
 			_int = va_arg(*arg_list, int);
 			temp = _int_to_string(_int, 10);
 			write(1, temp, strlen(temp));
+			*count = *count + strlen(temp) - 1;
 			free(temp);
 			break;
 		default:

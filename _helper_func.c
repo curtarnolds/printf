@@ -79,3 +79,9 @@ char *_int_to_string(int num, int base)
 
 	return (str);
 }
+
+
+/**
+ * _nulled_write - Write to fd but represent NULL as (null)
+ * 
+*/
