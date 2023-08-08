@@ -79,7 +79,8 @@ void _handle_escape_sequence(char format, int *count)
 void _handle_format_specifier(const char *format, va_list *arg_list,
 int *count, int *i)
 {
-	char *temp_c;
+	char *temp;
+	int _int;
 
 	switch (format[*i + 1])
 	{
@@ -87,20 +88,27 @@ int *count, int *i)
 			_putchar(va_arg(*arg_list, int));
 			break;
 		case 's':
-			temp_c = va_arg(*arg_list, char *);
-			if (temp_c == ((char *)0))
+			temp = va_arg(*arg_list, char *);
+			if (temp == ((char *)0))
 			{
 				write(1, "(null)", strlen("(null)"));
 				(*count) = *count + strlen("(null)") - 1;
 			}
 			else
 			{
-				write(1, temp_c, strlen(temp_c));
-				*count = *count + strlen(temp_c) - 1;
+				write(1, temp, strlen(temp));
+				*count = *count + strlen(temp) - 1;
 			}
 			break;
 		case '%':
 			_putchar('%');
+			break;
+		case 'd':
+		case 'i':
+			_int = va_arg(*arg_list, int);
+			temp = _int_to_string(_int, 10);
+			write(1, temp, strlen(temp));
+			free(temp);
 			break;
 		default:
 			_putchar('%');
